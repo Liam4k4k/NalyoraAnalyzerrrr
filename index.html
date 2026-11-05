@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#061a3b">
+  <meta name="description" content="Le hub communautaire Nalyora : joueurs, profils, guildes, classements et hôtel des ventes, par les joueurs pour les joueurs.">
+  <title>Le Hub des joueurs · Nalyora</title>
+  <link rel="icon" href="https://nalyora.fr/assets/favicon.png">
+  <link rel="preload" href="https://nalyora.fr/assets/fonts/pixelify-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://nalyora.fr/assets/fonts/lilita-one-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="https://nalyora.fr/css/style.css?v=38">
+  <link rel="stylesheet" href="https://nalyora.fr/css/aventure.css?v=44">
+  <link rel="stylesheet" href="https://nalyora.fr/css/accueil.css?v=14">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://nalyora.fr/js/fond.js?v=5" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body class="aventure page-accueil hub-page">
+  <header class="nav">
+    <a class="nav-marque" href="#accueil" aria-label="Accueil du Hub Nalyora"><img src="https://nalyora.fr/assets/logo.webp" width="2000" height="667" alt="Nalyora"></a>
+    <button type="button" class="nav-menu" id="nav-menu" aria-expanded="false" aria-controls="nav-principale" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+    <nav class="nav-liens" id="nav-principale" aria-label="Navigation principale">
+      <a href="#accueil" aria-current="page"><span>Accueil</span></a>
+      <a href="#joueurs"><span>Joueurs</span></a>
+      <a href="#classements"><span>Classements</span></a>
+      <a href="#guildes"><span>Guildes</span></a>
+      <a href="#marche"><span>Marché</span></a>
+    </nav>
+    <div class="nav-actions">
+      <a class="nav-bouton nav-boutique hub-official-link" href="https://nalyora.fr/" target="_blank" rel="noopener noreferrer"><span>Site de Nalyora</span><span aria-hidden="true">↗</span></a>
+      <button type="button" class="nav-bouton nav-theme" id="theme-toggle" aria-label="Changer de thème" title="Thème clair ou sombre"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.4 1.4m11.34 11.34 1.4 1.4M2 12h2m16 0h2M4.93 19.07l1.4-1.4M17.67 6.33l1.4-1.4"/></svg></button>
+    </div>
+  </header>
+
+  <main id="accueil">
+    <section class="aventure-hero hub-hero hub-home-section">
+      <h1 class="logo-wrap"><img class="logo" src="https://nalyora.fr/assets/logo.webp" width="2000" height="667" alt="Nalyora"></h1>
+      <p class="aventure-ruban">Par les joueurs, pour les joueurs.</p>
+      <p class="hub-hero-copy">Les joueurs, les guildes et le marché du serveur — réunis au même endroit.</p>
+      <div class="aventure-actions"><a class="hub-link-button" href="https://nalyora.fr/" target="_blank" rel="noopener noreferrer">Découvrir le site de Nalyora <span aria-hidden="true">↗</span></a></div>
+      <p class="aventure-statut"><span class="pulse hub-pulse" aria-hidden="true"></span>Le hub communautaire du serveur</p>
+    </section>
+
+    <section class="couche couche-terre hub-layer hub-home-section" id="joueurs" aria-labelledby="players-title">
+      <div class="couche-interieur">
+        <div class="couche-tete">
+          <div><p class="couche-sur">La communauté · <span id="online-count">—</span> en ligne</p><h2 class="couche-titre" id="players-title">Qui est déjà en jeu ?</h2></div>
+          <button class="hub-refresh" id="refresh-online" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.6 9a7 7 0 0 1 11.7-2L20 12M4 12l2.7 5a7 7 0 0 0 11.7-2"/></svg> Actualiser</button>
+        </div>
+        <p class="hub-section-intro">Ouvre un pseudo pour voir son niveau, ses connexions et sa guilde.</p>
+        <label class="hub-search"><span class="search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span><input id="player-search" type="search" placeholder="Chercher un pseudo…" autocomplete="off"></label>
+        <div class="hub-player-list" id="player-list"><p class="hub-empty">Chargement des joueurs…</p></div>
+        <p class="hub-empty" id="players-empty" hidden>Personne en ligne pour le moment.</p>
+      </div>
+    </section>
+
+    <section class="couche couche-pierre hub-layer hub-home-section" aria-labelledby="profile-title">
+      <div class="couche-interieur hub-two-columns">
+        <div class="hub-module">
+          <p class="couche-sur">Retrouve ton aventure</p><h2 class="couche-titre" id="profile-title">Un joueur en tête ?</h2>
+          <p class="hub-section-intro">Son profil est à portée d’un pseudo.</p>
+          <form id="profile-form" class="hub-profile-form"><label class="hub-search"><span class="search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span><input id="profile-input" maxlength="16" placeholder="Entre son pseudo Minecraft…" required><button aria-label="Rechercher un joueur"><span aria-hidden="true">↗</span></button></label></form>
+          <div class="hub-profile-result" id="profile-result">Niveau, dernières connexions et guilde s’afficheront ici.</div>
+        </div>
+        <div class="hub-module" id="classements">
+          <p class="couche-sur">Les joueurs à suivre</p><h2 class="couche-titre">Classements</h2>
+          <p class="hub-section-intro">Choisis une catégorie et compare les meilleurs du réseau.</p>
+          <div class="hub-ranking-controls"><label class="hub-dropdown"><span>Voir</span><select id="board-select" aria-label="Choisir un classement"><option value="niveaux">Niveaux</option><option value="argent">Fortune</option><option value="guildes">Guildes</option></select></label>
+          <label class="hub-dropdown paw-dropdown" id="wealth-wrap" hidden><span class="paw-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="16" rx="5" ry="4"/><circle cx="5.5" cy="10" r="1.8"/><circle cx="10" cy="6.5" r="1.8"/><circle cx="14.5" cy="6.5" r="1.8"/><circle cx="18.5" cy="10" r="1.8"/></svg></span><select id="wealth-type" aria-label="Choisir une monnaie"><option value="vault">Argent</option><option value="ecoshop">Paws</option><option value="afk">Points AFK</option></select></label></div>
+          <div class="hub-board-list" id="leaderboard-list"><p class="hub-empty">Chargement du classement…</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="couche couche-abysse hub-layer hub-home-section" id="guildes" aria-labelledby="guild-title">
+      <div class="couche-interieur">
+        <div class="couche-tete"><div><p class="couche-sur">À plusieurs, c’est mieux · <span id="guild-count">—</span> recensées</p><h2 class="couche-titre" id="guild-title">Toutes les guildes</h2></div></div>
+        <p class="hub-section-intro">Trouve ta prochaine équipe et découvre ses membres.</p>
+        <label class="hub-search"><span class="search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span><input id="guild-search" placeholder="Chercher une guilde…" maxlength="20"></label>
+        <div class="hub-guild-list" id="guild-list"><p class="hub-empty">Chargement des guildes…</p></div>
+        <button class="hub-more" id="guild-more" type="button" hidden>Afficher plus de guildes <span aria-hidden="true">↓</span></button>
+      </div>
+    </section>
+
+    <section class="couche couche-pierre hub-layer hub-subpage" id="guild-page" hidden aria-labelledby="guild-page-title">
+      <div class="couche-interieur">
+        <a class="hub-back" href="#guildes">← Retour à toutes les guildes</a>
+        <div id="guild-page-content"><p class="hub-empty">Chargement de la guilde…</p></div>
+      </div>
+    </section>
+
+    <section class="couche couche-abysse hub-layer hub-subpage" id="player-page" hidden aria-labelledby="player-page-title">
+      <div class="couche-interieur">
+        <a class="hub-back" href="#joueurs">← Retour au Hub</a>
+        <div id="player-page-content"><p class="hub-empty">Chargement du profil…</p></div>
+      </div>
+    </section>
+
+    <section class="couche couche-terre hub-layer hub-home-section" id="marche" aria-labelledby="market-title">
+      <div class="couche-interieur">
+        <div class="couche-tete"><div><p class="couche-sur">En ce moment · <span class="hub-count"><b id="auction-count">—</b> annonces</span></p><h2 class="couche-titre" id="market-title">Ça s’échange à Nalyora</h2></div><a class="hub-text-link" href="#/marche">Tout le marché <span aria-hidden="true">↗</span></a></div>
+        <p class="hub-section-intro">Un aperçu qui tourne parmi toutes les annonces actives.</p>
+        <div class="hub-auction-carousel"><button class="hub-carousel-arrow" id="auction-prev" type="button" aria-label="Annonces précédentes">‹</button><div class="hub-carousel-window"><div class="hub-carousel-track" id="auction-carousel"><p class="hub-empty">Chargement des annonces…</p></div></div><button class="hub-carousel-arrow" id="auction-next" type="button" aria-label="Annonces suivantes">›</button></div>
+        <div class="hub-carousel-footer"><span id="auction-carousel-count">—</span><span class="hub-carousel-dots" id="auction-carousel-dots"></span><span>Prix moyen : <b id="average-price">—</b></span></div>
+      </div>
+    </section>
+
+    <section class="couche couche-pierre hub-layer hub-subpage" id="market-page" hidden aria-labelledby="market-page-title"><div class="couche-interieur"><a class="hub-back" href="#marche">← Retour à l’accueil</a><div class="hub-page-heading"><p class="couche-sur">LES ÉCHANGES ENTRE JOUEURS</p><h1 id="market-page-title">Hôtel des ventes</h1><p>Les annonces actives du serveur, au même endroit.</p></div><div class="hub-market-tools"><label class="hub-search"><span class="search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span><input id="market-page-search" placeholder="Chercher un objet…" maxlength="64"></label><select id="market-page-sort" aria-label="Trier les annonces"><option value="recent">Plus récentes</option><option value="prix_asc">Prix croissant</option><option value="prix_desc">Prix décroissant</option><option value="expiration">Expiration proche</option></select></div><p class="hub-market-total"><b id="market-page-count">—</b> annonces actives</p><div class="hub-auction-list hub-full-market-list" id="market-page-list"><p class="hub-empty">Chargement du marché…</p></div><button class="hub-more" id="market-load-more" type="button" hidden>Afficher les annonces suivantes</button></div></section>
+
+    <section class="couche couche-abysse hub-layer hub-subpage" id="auction-page" hidden aria-labelledby="auction-page-title"><div class="couche-interieur"><a class="hub-back" href="#/marche">← Retour au marché</a><div id="auction-page-content"><p class="hub-empty">Chargement de l’annonce…</p></div></div></section>
+
+  </main>
+
+  <footer class="pied hub-footer">
+    <div class="hub-footer-main"><a class="hub-footer-logo" href="https://nalyora.fr/" target="_blank" rel="noopener noreferrer"><img src="https://nalyora.fr/assets/logo.webp" width="2000" height="667" alt="Nalyora"></a><p>Un outil communautaire, par les joueurs pour les joueurs.</p></div>
+    <nav class="hub-footer-index" aria-label="Index du site"><span>Index</span><a href="#accueil">Accueil</a><a href="#joueurs">Joueurs</a><a href="#classements">Classements</a><a href="#guildes">Guildes</a><a href="#marche">Marché</a></nav>
+    <div class="hub-footer-links"><a href="https://nalyora.fr/" target="_blank" rel="noopener noreferrer">Site de Nalyora ↗</a></div>
+    <p class="hub-disclaimer">Site communautaire non affilié au serveur Nalyora · Direction artistique inspirée du site de Nalyora, créé par Liam4k4k.</p>
+  </footer>
+  <div class="hub-toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
